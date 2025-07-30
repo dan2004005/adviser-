@@ -141,29 +141,21 @@
     let button = list.querySelector('li a')
 
     button.addEventListener('click', function () {
-        let alert = document.querySelector('#vpnAlert');
-        alert.classList.add('open');
-        let alert2 = document.querySelector('#vpnAlert2');
-        alert2.classList.add('open');
+    let alert = document.querySelector('#vpnAlert');
+    if (alert) alert.classList.add('open');
+    let alert2 = document.querySelector('#vpnAlert2');
+    if (alert2) alert2.classList.add('open');
 
-        let chat = document.querySelector('#chatbase-bubble-window')
-        let chatButton = document.querySelector('#chatbase-bubble-button')
+    if (window.chatbase && typeof window.chatbase.open === 'function') {
+        window.chatbase.open();
+    } else if (window.chatbase) {
+        window.chatbase('open');
+    }
 
-        if(chat) {
-            chatButton.click()
+    button.style.display = 'none';
 
-            let newListItem = document.createElement('li')
-            newListItem.appendChild(chat)
-            list.appendChild(newListItem)
-
-            chat.style.display = 'flex'
-            chat.style.position = ''
-
-            button.style.display = 'none'
-
-            document.documentElement.removeAttribute("class");
-        }
-    })
+    document.documentElement.removeAttribute("class");
+});
 </script>
 
 </body></html>
