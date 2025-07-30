@@ -89,14 +89,6 @@
     }
 </style>
 
-<div class="overlay" id="vpnAlert">
-    <div class="alert-box">
-        <h1>VPN Необходим</h1><br>
-        <p>Пожалуйста, включите VPN и перезагрузите страницу для продолжения.</p>
-        <button onclick="hideAlert('vpnAlert')">Ок</button>
-    </div>
-</div>
-
 <div class="overlay" id="vpnAlert2">
     <div class="alert-box wide">
         <div class="responsive-iframe-container">
@@ -158,8 +150,6 @@
     let button = list.querySelector('li a')
 
     button.addEventListener('click', function () {
-        let alert = document.querySelector('#vpnAlert');
-        alert.classList.add('open');
         let alert2 = document.querySelector('#vpnAlert2');
         alert2.classList.add('open');
 
