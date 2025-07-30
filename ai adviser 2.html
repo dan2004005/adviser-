@@ -138,28 +138,26 @@
     let list = document.querySelector('#buttons07')
     let button = list.querySelector('li a')
 
-    button.addEventListener('click', function () {
-        let alert2 = document.querySelector('#vpnAlert2');
-        alert2.classList.add('open');
+    button.addEventListener('click', function (event) {
+    event.preventDefault();
 
-        let chat = document.querySelector('#chatbase-bubble-window')
-        let chatButton = document.querySelector('#chatbase-bubble-button')
+    let alert2 = document.querySelector('#vpnAlert2');
+    alert2.classList.add('open');
 
-        if(chat) {
-            chatButton.click()
 
-            let newListItem = document.createElement('li')
-            newListItem.appendChild(chat)
-            list.appendChild(newListItem)
+    const waitForChat = setInterval(() => {
+        let chat = document.querySelector('#chatbase-bubble-window');
+        let chatButton = document.querySelector('#chatbase-bubble-button');
 
-            chat.style.display = 'flex'
-            chat.style.position = ''
-
-            button.style.display = 'none'
-
-            document.documentElement.removeAttribute("class");
+        if (chat) {
+            chat.classList.add('open');
+            if (chatButton) {
+                chatButton.style.display = 'none';
+            }
+            clearInterval(waitForChat);
         }
-    })
+    }, 200); 
+});  
 </script>
 
 </body></html>
