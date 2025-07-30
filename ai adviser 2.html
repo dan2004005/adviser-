@@ -79,7 +79,7 @@
         width: 100%;
         max-width: 500px; /* Ограничим на больших экранах */
         height: 480px;     /* Установим фиксированную высоту */
-        margin: 0;    /* Центрирование по центру */
+        margin: 0 auto;    /* Центрирование по центру */
     }
 
     .responsive-iframe-container iframe {
@@ -126,16 +126,12 @@
         width: auto;
     }
 </style>
-    
-<div class="responsive-iframe-container" style="margin: 40px auto;">
-  <iframe
-    src="https://www.chatbase.co/chatbot-iframe/7yrun84_eAMXHMBASDN-E"
-    width="400"
-    height="600"
-    style="border: none; border-radius: 12px; box-shadow: 0 2px 16px rgba(0,0,0,0.08); display: block; margin: 0 auto;">
-  </iframe>
-</div>
-    
+
+<script>
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}
+        const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="7yrun84_eAMXHMBASDN-E";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
 <script>
     function hideAlert(vpnAlertId) {
         document.getElementById(vpnAlertId).style.display = "none";
@@ -145,21 +141,29 @@
     let button = list.querySelector('li a')
 
     button.addEventListener('click', function () {
-    let alert = document.querySelector('#vpnAlert');
-    if (alert) alert.classList.add('open');
-    let alert2 = document.querySelector('#vpnAlert2');
-    if (alert2) alert2.classList.add('open');
+        let alert = document.querySelector('#vpnAlert');
+        alert.classList.add('open');
+        let alert2 = document.querySelector('#vpnAlert2');
+        alert2.classList.add('open');
 
-    if (window.chatbase && typeof window.chatbase.open === 'function') {
-        window.chatbase.open();
-    } else if (window.chatbase) {
-        window.chatbase('open');
-    }
+        let chat = document.querySelector('#chatbase-bubble-window')
+        let chatButton = document.querySelector('#chatbase-bubble-button')
 
-    button.style.display = 'none';
+        if(chat) {
+            chatButton.click()
 
-    document.documentElement.removeAttribute("class");
-});
+            let newListItem = document.createElement('li')
+            newListItem.appendChild(chat)
+            list.appendChild(newListItem)
+
+            chat.style.display = 'flex'
+            chat.style.position = ''
+
+            button.style.display = 'none'
+
+            document.documentElement.removeAttribute("class");
+        }
+    })
 </script>
 
 </body></html>
