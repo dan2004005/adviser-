@@ -131,33 +131,45 @@
 </script>
 
 <script>
-    function hideAlert(vpnAlertId) {
-        document.getElementById(vpnAlertId).style.display = "none";
-    }
-    
-    let list = document.querySelector('#buttons07')
-    let button = list.querySelector('li a')
-
-    button.addEventListener('click', function (event) {
-    event.preventDefault();
-
-    let alert2 = document.querySelector('#vpnAlert2');
-    alert2.classList.add('open');
-
-
-    const waitForChat = setInterval(() => {
-        let chat = document.querySelector('#chatbase-bubble-window');
-        let chatButton = document.querySelector('#chatbase-bubble-button');
-
-        if (chat) {
-            chat.classList.add('open');
-            if (chatButton) {
-                chatButton.style.display = 'none';
-            }
-            clearInterval(waitForChat);
+    window.onload = function () {
+        function hideAlert(vpnAlertId) {
+            document.getElementById(vpnAlertId).style.display = "none";
         }
-    }, 200); 
-});  
+
+        let list = document.querySelector('#buttons07');
+        if (!list) {
+            console.error('Element #buttons07 not found');
+            return;
+        }
+
+        let button = list.querySelector('li a');
+        if (!button) {
+            console.error('Button inside #buttons07 not found');
+            return;
+        }
+
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            let alert2 = document.querySelector('#vpnAlert2');
+            if (alert2) alert2.classList.add('open');
+
+            const waitForChat = setInterval(() => {
+                let chat = document.querySelector('#chatbase-bubble-window');
+                let chatButton = document.querySelector('#chatbase-bubble-button');
+
+                if (chat) {
+                    chat.classList.add('open');
+                    if (chatButton) {
+                        chatButton.style.display = 'none';
+                    }
+                    clearInterval(waitForChat);
+                }
+            }, 200);
+        });
+    };
+</script>
+
 </script>
 
 </body></html>
