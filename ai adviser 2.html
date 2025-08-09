@@ -124,37 +124,6 @@
         const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="7yrun84_eAMXHMBASDN-E";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const chatWindow = document.getElementById('chatbase-bubble-window');
-    const startButton = document.querySelector('#buttons07 li a'); 
-
-    if (!chatWindow || !startButton) return;
-
-    function updateButtonVisibility() {
-      const isChatHidden = window.getComputedStyle(chatWindow).display === 'none' || window.getComputedStyle(chatWindow).visibility === 'hidden';
-
-      if (isChatHidden) {
-        startButton.style.display = 'inline-block';  
-      } else {
-        startButton.style.display = 'none';        
-      }
-    }
-
-    updateButtonVisibility();
-    const observer = new MutationObserver(() => {
-      updateButtonVisibility();
-    });
-
-    observer.observe(chatWindow, { attributes: true, attributeFilter: ['style', 'class'] });
-    startButton.addEventListener('click', () => {
-      startButton.style.display = 'none';
-      chatWindow.style.display = 'flex';
-    });
-  });
-</script>
-
-
 <script src="https://www.momentcrm.com/embed"></script>
 <script>
   MomentCRM('init', {
@@ -211,6 +180,27 @@
             document.documentElement.removeAttribute("class");
         }
     })
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const chatWindow = document.getElementById('chatbase-bubble-window');
+    const startButton = document.querySelector('#buttons07 li a');
+
+    if (!chatWindow || !startButton) return;
+
+    function toggleButton() {
+      const isChatVisible = window.getComputedStyle(chatWindow).display !== 'none';
+      startButton.style.display = isChatVisible ? 'none' : 'inline-block';
+    }
+
+    setInterval(toggleButton, 300);
+
+    startButton.addEventListener('click', () => {
+      chatWindow.style.display = 'flex';
+      startButton.style.display = 'none';
+    });
+  });
 </script>
 
 </body></html>
