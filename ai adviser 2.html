@@ -150,4 +150,57 @@
     }
   </style>
 
+    <script>
+    function hideAlert(vpnAlertId) {
+        document.getElementById(vpnAlertId).style.display = "none";
+    }
+    
+    let list = document.querySelector('#buttons07')
+    let button = list.querySelector('li a')
+
+    button.addEventListener('click', function () {
+        let alert2 = document.querySelector('#vpnAlert2');
+        alert2.classList.add('open');
+
+        let chat = document.querySelector('#chatbase-bubble-window')
+        let chatButton = document.querySelector('#chatbase-bubble-button')
+
+        if(chat) {
+            chatButton.click()
+
+            let newListItem = document.createElement('li')
+            newListItem.appendChild(chat)
+            list.appendChild(newListItem)
+
+            chat.style.display = 'flex'
+            chat.style.position = ''
+
+            button.style.display = 'none'
+
+            document.documentElement.removeAttribute("class");
+        }
+    })
+</script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const startBtn = document.querySelector('#buttons07 a.button.n01');
+  if (!startBtn) return;
+
+  startBtn.addEventListener('click', () => {
+    startBtn.style.display = 'none';
+  });
+
+  document.body.addEventListener('click', e => {
+    const target = e.target.closest('a[href*="/end-chat"]');
+    if (target) {
+      setTimeout(() => {
+        startBtn.style.display = 'inline-block';
+      }, 300);
+    }
+  });
+});
+</script>
+
+
 </body></html>
