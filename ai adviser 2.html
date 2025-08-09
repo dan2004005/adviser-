@@ -150,32 +150,4 @@
     }
   </style>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const chatWindow = document.getElementById('chatbase-bubble-window');
-  const chatButton = document.getElementById('chatbase-bubble-button');
-  const startGrowthBtn = document.querySelector('#buttons07 a.button.n01');
-
-  if (!chatWindow || !chatButton || !startGrowthBtn) return;
-
-
-  startGrowthBtn.addEventListener('click', () => {
-    chatButton.click();
-    startGrowthBtn.style.display = 'none';
-  });
-
- 
-  document.body.addEventListener('click', (e) => {
-    const target = e.target.closest('a[href*="/end-chat"]');
-    if (target) {
-      
-      setTimeout(() => {
-        startGrowthBtn.style.display = 'inline-block';
-      }, 500);
-    }
-  });
-});
-</script>
-
-
 </body></html>
