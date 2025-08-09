@@ -158,31 +158,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (!chatWindow || !chatButton || !startGrowthBtn) return;
 
-  function updateButtonVisibility() {
-    const chatIsVisible = window.getComputedStyle(chatWindow).display !== 'none';
-    startGrowthBtn.style.display = chatIsVisible ? 'none' : 'inline-block';
-  }
 
   startGrowthBtn.addEventListener('click', () => {
     chatButton.click();
     startGrowthBtn.style.display = 'none';
   });
 
+ 
   document.body.addEventListener('click', (e) => {
     const target = e.target.closest('a[href*="/end-chat"]');
     if (target) {
+      
       setTimeout(() => {
-        if (chatWindow) {
-          chatWindow.style.display = 'none';
-        }
         startGrowthBtn.style.display = 'inline-block';
-      }, 300);
+      }, 500);
     }
   });
-
-  updateButtonVisibility();
-  setInterval(updateButtonVisibility, 300);
 });
 </script>
+
 
 </body></html>
