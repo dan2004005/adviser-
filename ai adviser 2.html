@@ -183,31 +183,37 @@
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const chatWindow = document.getElementById('chatbase-bubble-window');
-    const startButton = document.querySelector('a.button.n01, button.n01');
+document.addEventListener('DOMContentLoaded', () => {
+  const chatWindow = document.getElementById('chatbase-bubble-window');
+  const startGrowthBtn = document.querySelector('#buttons07 a.button.n01');
 
-    if (!chatWindow || !startButton) return;
+  if (!chatWindow || !startGrowthBtn) return;
 
-    function updateButtonVisibility() {
-      const isVisible = window.getComputedStyle(chatWindow).display !== 'none';
-      startButton.style.display = isVisible ? 'none' : 'inline-block';
+  function updateButtonVisibility() {
+    const chatIsVisible = window.getComputedStyle(chatWindow).display !== 'none';
+    if (chatIsVisible) {
+     
+      startGrowthBtn.style.display = 'none';
+    } else {
+      
+      startGrowthBtn.style.display = 'inline-block';
     }
+  }
 
-    const observer = new MutationObserver(() => {
-      updateButtonVisibility();
-    });
+  /
+  setInterval(updateButtonVisibility, 300);
 
-    observer.observe(chatWindow, { attributes: true, attributeFilter: ['style'] });
 
-    updateButtonVisibility();
-
-    startButton.addEventListener('click', () => {
-      chatWindow.style.display = 'flex';
-      startButton.style.display = 'none';
-    });
+  startGrowthBtn.addEventListener('click', () => {
+    chatWindow.style.display = 'flex';  
+    startGrowthBtn.style.display = 'none';
   });
+
+
+  updateButtonVisibility();
+});
 </script>
+
 
 
 </body></html>
