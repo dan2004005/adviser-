@@ -151,69 +151,38 @@
   </style>
 
 <script>
-    function hideAlert(vpnAlertId) {
-        document.getElementById(vpnAlertId).style.display = "none";
-    }
-    
-    let list = document.querySelector('#buttons07')
-    let button = list.querySelector('li a')
-
-    button.addEventListener('click', function () {
-        let alert2 = document.querySelector('#vpnAlert2');
-        alert2.classList.add('open');
-
-        let chat = document.querySelector('#chatbase-bubble-window')
-        let chatButton = document.querySelector('#chatbase-bubble-button')
-
-        if(chat) {
-            chatButton.click()
-
-            let newListItem = document.createElement('li')
-            newListItem.appendChild(chat)
-            list.appendChild(newListItem)
-
-            chat.style.display = 'flex'
-            chat.style.position = ''
-
-            button.style.display = 'none'
-
-            document.documentElement.removeAttribute("class");
-        }
-    })
-</script>
-
-<script>
 document.addEventListener('DOMContentLoaded', () => {
   const chatWindow = document.getElementById('chatbase-bubble-window');
+  const chatButton = document.getElementById('chatbase-bubble-button');
   const startGrowthBtn = document.querySelector('#buttons07 a.button.n01');
 
-  if (!chatWindow || !startGrowthBtn) return;
+  if (!chatWindow || !chatButton || !startGrowthBtn) return;
 
   function updateButtonVisibility() {
     const chatIsVisible = window.getComputedStyle(chatWindow).display !== 'none';
-    if (chatIsVisible) {
-     
-      startGrowthBtn.style.display = 'none';
-    } else {
-      
-      startGrowthBtn.style.display = 'inline-block';
-    }
+    startGrowthBtn.style.display = chatIsVisible ? 'none' : 'inline-block';
   }
 
-  /
-  setInterval(updateButtonVisibility, 300);
-
-
   startGrowthBtn.addEventListener('click', () => {
-    chatWindow.style.display = 'flex';  
+    chatButton.click();
     startGrowthBtn.style.display = 'none';
   });
 
+  document.body.addEventListener('click', (e) => {
+    const target = e.target.closest('a[href*="/end-chat"]');
+    if (target) {
+      setTimeout(() => {
+        if (chatWindow) {
+          chatWindow.style.display = 'none';
+        }
+        startGrowthBtn.style.display = 'inline-block';
+      }, 300);
+    }
+  });
 
   updateButtonVisibility();
+  setInterval(updateButtonVisibility, 300);
 });
 </script>
-
-
 
 </body></html>
