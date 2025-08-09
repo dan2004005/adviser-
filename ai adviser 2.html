@@ -182,28 +182,43 @@
     })
 </script>
 
-  <script>
+ <script>
 document.addEventListener('DOMContentLoaded', () => {
   const chatWindow = document.getElementById('chatbase-bubble-window');
   const startBtn = document.querySelector('#buttons07 a.button.n01');
+  const endChatBtn = document.querySelector('a[href*="end-chat"]');
 
   if (!chatWindow || !startBtn) return;
-
-  function updateButtonVisibility() {
-    const chatVisible = window.getComputedStyle(chatWindow).display !== 'none';
-    startBtn.style.display = chatVisible ? 'none' : 'inline-block';
+  function showStartButton() {
+    startBtn.style.display = 'inline-block';
   }
 
-  setInterval(updateButtonVisibility, 300);
+  function hideStartButton() {
+    startBtn.style.display = 'none';
+  }
+ 
+  if (endChatBtn) {
+    endChatBtn.addEventListener('click', () => {
+      
+      setTimeout(() => {
+        chatWindow.style.display = 'none';
+        showStartButton();
+      }, 100);
+    });
+  }
 
   startBtn.addEventListener('click', (e) => {
     e.preventDefault();
     chatWindow.style.display = 'flex';
-    startBtn.style.display = 'none';
+    hideStartButton();
   });
+
+  if (window.getComputedStyle(chatWindow).display === 'none') {
+    showStartButton();
+  } else {
+    hideStartButton();
+  }
 });
 </script>
-
-
 
 </body></html>
