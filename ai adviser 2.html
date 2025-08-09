@@ -186,9 +186,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const chatWindow = document.getElementById('chatbase-bubble-window');
   const startBtn = document.querySelector('#buttons07 a.button.n01');
-  const endChatBtn = document.querySelector('a[href*="end-chat"]');
+  const confirmBtn = document.querySelector('a[href^="/chatbot-iframe/7yrun84_eAMXHMBASDN-E"] button');
 
-  if (!chatWindow || !startBtn) return;
+  if (!chatWindow || !startBtn || !confirmBtn) return;
+
   function showStartButton() {
     startBtn.style.display = 'inline-block';
   }
@@ -196,21 +197,18 @@ document.addEventListener('DOMContentLoaded', () => {
   function hideStartButton() {
     startBtn.style.display = 'none';
   }
- 
-  if (endChatBtn) {
-    endChatBtn.addEventListener('click', () => {
-      
-      setTimeout(() => {
-        chatWindow.style.display = 'none';
-        showStartButton();
-      }, 100);
-    });
-  }
 
   startBtn.addEventListener('click', (e) => {
     e.preventDefault();
     chatWindow.style.display = 'flex';
     hideStartButton();
+  });
+
+  confirmBtn.addEventListener('click', () => {
+    setTimeout(() => {
+      chatWindow.style.display = 'none';
+      showStartButton();
+    }, 200);
   });
 
   if (window.getComputedStyle(chatWindow).display === 'none') {
@@ -220,5 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+
 
 </body></html>
