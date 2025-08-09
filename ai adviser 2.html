@@ -189,12 +189,18 @@
 
     if (!chatWindow || !startButton) return;
 
-    function toggleButton() {
-      const isChatVisible = window.getComputedStyle(chatWindow).display !== 'none';
-      startButton.style.display = isChatVisible ? 'none' : 'inline-block';
+    function updateButtonVisibility() {
+      const isVisible = window.getComputedStyle(chatWindow).display !== 'none';
+      startButton.style.display = isVisible ? 'none' : 'inline-block';
     }
 
-    setInterval(toggleButton, 300);
+    const observer = new MutationObserver(() => {
+      updateButtonVisibility();
+    });
+
+    observer.observe(chatWindow, { attributes: true, attributeFilter: ['style'] });
+
+    updateButtonVisibility();
 
     startButton.addEventListener('click', () => {
       chatWindow.style.display = 'flex';
