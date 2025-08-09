@@ -182,25 +182,28 @@
     })
 </script>
 
-    <script>
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
+  const chatWindow = document.getElementById('chatbase-bubble-window');
   const startBtn = document.querySelector('#buttons07 a.button.n01');
-  if (!startBtn) return;
 
-  startBtn.addEventListener('click', () => {
+  if (!chatWindow || !startBtn) return;
+
+  function updateButtonVisibility() {
+    const chatVisible = window.getComputedStyle(chatWindow).display !== 'none';
+    startBtn.style.display = chatVisible ? 'none' : 'inline-block';
+  }
+
+  setInterval(updateButtonVisibility, 300);
+
+  startBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    chatWindow.style.display = 'flex';
     startBtn.style.display = 'none';
-  });
-
-  document.body.addEventListener('click', e => {
-    const target = e.target.closest('a[href*="/end-chat"]');
-    if (target) {
-      setTimeout(() => {
-        startBtn.style.display = 'inline-block';
-      }, 300);
-    }
   });
 });
 </script>
+
 
 
 </body></html>
