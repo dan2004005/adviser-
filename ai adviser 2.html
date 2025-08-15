@@ -128,18 +128,12 @@
     }
   </style>
 
-    <script>
-    function hideAlert(vpnAlertId) {
-        document.getElementById(vpnAlertId).style.display = "none";
-    }
+<script>
     
     let list = document.querySelector('#buttons07')
     let button = list.querySelector('li a')
 
     button.addEventListener('click', function () {
-        let alert2 = document.querySelector('#vpnAlert2');
-        alert2.classList.add('open');
-
         let chat = document.querySelector('#chatbase-bubble-window')
         let chatButton = document.querySelector('#chatbase-bubble-button')
 
